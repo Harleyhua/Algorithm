@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClosedXML.Excel; // 引入ClosedXML的命名空间
 using DocumentFormat.OpenXml.Presentation;
@@ -12,6 +14,7 @@ using NPOI.SS.UserModel;
 using ZXing; // 条形码生成库
 using ZXing.Common;
 using ZXing.QrCode.Internal;
+using Font = System.Drawing.Font;
 
 
 namespace Algorithm
@@ -22,11 +25,14 @@ namespace Algorithm
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+
         }
 
+        private bool isNumberSelected = false;
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            txtInput.KeyDown += new KeyEventHandler(ListenInputDataAndMouseClick);
+  
         }
 
         public static string CustomAlgorithm(string input)
@@ -95,25 +101,18 @@ namespace Algorithm
                     Height = 100 // 条形码高度
                 }
             };
-            var barcode = writer.Write(content);
-            barcode.Save(filePath);
+            // 生成条形码图像
+            using (var barcode = writer.Write(content))
+            {
+                using (Graphics g = Graphics.FromImage(barcode))
+                {
+                    // 设置文本的字体和大小
+                    Font font = new Font("Arial", 100, FontStyle.Bold); 
+                    g.DrawString(content, font, Brushes.Black, new PointF(0, barcode.Height - 20));
+                }
+                barcode.Save(filePath, System.Drawing.Imaging.ImageFormat.Png);
+            }
         }
-
-        //private void PW_GenerateBarcodeImage(string content, string filePath)
-        //{
-        //    // 创建条形码写入器
-        //    var writer = new BarcodeWriter
-        //    {
-        //        Format = BarcodeFormat.CODE_128, // 选择条形码格式
-        //        Options = new EncodingOptions
-        //        {
-        //            Width = 250, // 条形码宽度
-        //            Height = 100 // 条形码高度
-        //        }
-        //    };
-        //    var barcode = writer.Write(content);
-        //    barcode.Save(filePath);
-        //}
 
         private void SN_DisplayBarcodeImage(string imagePath)
         {
@@ -128,23 +127,10 @@ namespace Algorithm
 
         }
 
-        //private void PW_DisplayBarcodeImage(string imagePath)
-        //{
-        //    PW_pictureBox.Image = null;
-
-        //    Bitmap barcodeImage = new Bitmap(imagePath);
-        //    //Image barcodeImage = Image.FromFile(imagePath);
-        //    PW_pictureBox.Image = barcodeImage;
-        //    PW_pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-        //    PW_pictureBox.Invalidate();
-        //}
-
         // 生成随机文件名
         string GenerateRandomFileName()
         {
-            // 使用Guid生成一个随机字符串，然后去掉其中的连字符并转换为小写  
             string randomString = Guid.NewGuid().ToString("N").ToLower();
-            // 假设我们只想要前8个字符作为文件名  
             return randomString.Substring(0, Math.Min(randomString.Length, 4));
         }
 
@@ -156,19 +142,35 @@ namespace Algorithm
                 Format = BarcodeFormat.QR_CODE,
                 Options = new ZXing.Common.EncodingOptions
                 {
-                    Width = 250, // 二维码宽度
-                    Height = 250, // 二维码高度
-                    Margin = 10, // 二维码周围的空白边距
+                    Width = 1000, // 二维码宽度
+                    Height = 1000, // 二维码高度
+                    Margin = 5 // 二维码周围的空白边距
                 }
             };
             // 设置QRCode特定的编码选项
             writer.Options.Hints[EncodeHintType.ERROR_CORRECTION] = ErrorCorrectionLevel.H;
 
-            // 生成二维码图像
             using (Bitmap bitmap = writer.Write(content))
             {
-                bitmap.Save(filePath, System.Drawing.Imaging.ImageFormat.Png);
-            }
+                using (Graphics g = Graphics.FromImage(bitmap))
+                {
+                    // 设置文本的格式
+                    Font font = new Font("Arial", 80);
+                    Brush brush = Brushes.Black;
+                    StringFormat sf = new StringFormat
+                    {
+                        Alignment = StringAlignment.Center,
+                        LineAlignment = StringAlignment.Far
+                    };
+                    int textX = bitmap.Width - 500;
+                    int textY = bitmap.Height + 10;
+
+                    string text = content.Substring(0, 8);
+                    g.DrawString(text, font, brush, textX, textY, sf);
+                }
+
+                bitmap.Save(filePath, ImageFormat.Png);
+            }           
         }
 
         private void QRC_DisplayBarcodeImage(string imagePath)
@@ -180,6 +182,74 @@ namespace Algorithm
             QRC_pictureBox.Image = barcodeImage;
             QRC_pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             QRC_pictureBox.Invalidate();
+        }
+
+        //监听 输入栏事件， 当输入栏有内容并且有回车敲击，则生成 对应 码在下方
+        private void ListenInputDataAndMouseClick(object sender, KeyEventArgs e)
+        {
+            //regular 只保留数字
+            number.Text = number.Text.Replace(" ", "");
+            txtInput.Text = txtInput.Text.Replace(" ", "");
+            if (e.KeyCode == Keys.Enter && number.Text == "1")
+            {
+                half_num_btnTransform_Click();
+                //到剪切板
+            }
+        }
+        private void half_num_btnTransform_Click()
+        {
+            if (int.TryParse(number.Text, out int loopCount) && loopCount > 0)
+            {
+                // 用于存储转换结果的列表
+                List<string> results = new List<string>();
+                string currentNumber = txtInput.Text;
+
+                // 检查输入的首位是否是字母，如果是，则检查是否为大写
+                if (char.IsLetter(currentNumber, 0) && !char.IsUpper(currentNumber[0]))
+                {
+                    MessageBox.Show("请输入大写字母！");
+                    return;
+                }
+                txtResults.Clear();
+
+                if (loopCount == 1)
+                {
+                    try
+                    {
+                        string input = txtInput.Text;
+                        string result = CustomAlgorithm(input);
+                        lblResult.Text = result;
+                        string resultLine = $"{currentNumber} -> {result}";
+                        results.Add(resultLine);
+                        txtResults.AppendText(resultLine + "\n\r");
+
+                        string QRC = input + result;
+                        // 根据输入文本生成条形码
+                        string snFileName = $"S{GenerateRandomFileName()}.png";
+                        SN_GenerateBarcodeImage(input, snFileName);
+                        SN_DisplayBarcodeImage(snFileName);
+                        // 生成二维码
+                        string QRCFileName = $"Q{GenerateRandomFileName()}.png";
+                        GenerateQRCode(QRC, QRCFileName);
+                        QRC_DisplayBarcodeImage(QRCFileName);
+
+                        resultLine = resultLine.Replace('\r', ' ');
+                        resultLine = resultLine.Replace('\n', ' ');
+                        resultLine = resultLine.Replace(" ", "");
+                        resultLine = resultLine.Replace("->", ";");
+                        Clipboard.SetText(resultLine);
+
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("请输入整数！");
+            }
         }
 
         private void num_btnTransform_Click(object sender, EventArgs e)
@@ -214,10 +284,6 @@ namespace Algorithm
                             string snFileName = $"S{GenerateRandomFileName()}.png";
                             SN_GenerateBarcodeImage(input, snFileName);
                             SN_DisplayBarcodeImage(snFileName);
-                            //// 根据算法结果生成条形码
-                            //string pwFileName = $"P{GenerateRandomFileName()}.png";
-                            //PW_GenerateBarcodeImage(result, pwFileName);
-                            //PW_DisplayBarcodeImage(pwFileName);
 
                             string QRCFileName = $"Q{GenerateRandomFileName()}.png";
                             GenerateQRCode(QRC, QRCFileName);
@@ -229,20 +295,21 @@ namespace Algorithm
                             MessageBox.Show("Error: " + ex.Message);
                         }
 
-                        // 显示询问框
-                        DialogResult dialogResult = MessageBox.Show("是否导出Excel表？", "操作确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        //// 显示询问框
+                        //DialogResult dialogResult = MessageBox.Show("是否导出Excel表？", "操作确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                        if (dialogResult == DialogResult.Yes)
-                        {
-                            //导出到Excel
-                            ExportToExcel_xls(results);
-                        }
-                        else if (dialogResult == DialogResult.No)
-                        {
-                            MessageBox.Show("已取消导出Excel表！");
-                        }
+                        //if (dialogResult == DialogResult.Yes)
+                        //{
+                        //    //导出到Excel
+                        //    ExportToExcel_xls(results);
+                        //}
+                        //else if (dialogResult == DialogResult.No)
+                        //{
+                        //    MessageBox.Show("已取消导出Excel表！");
+                        //}
                 }
-                else {
+                else 
+                {
                     for (int i = 0; i < loopCount; i++)
                     {
                         string transformedResult = CustomAlgorithm(currentNumber);
@@ -257,12 +324,36 @@ namespace Algorithm
 
                     ExportToExcel_xls(results);
                 }
-                }
+            }
             else
             {
                 MessageBox.Show("请输入整数！");
             }
         }
+
+        private void txtResults_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtResults.SelectedText))
+            {
+                string selectedText = txtResults.SelectedText.Trim();
+
+                if (selectedText.StartsWith("A") || selectedText.StartsWith("B") || selectedText.StartsWith("C"))
+                {
+                    string result = CustomAlgorithm(selectedText);
+                    lblResult.Text = result;
+
+                    string snFileName = $"S{GenerateRandomFileName()}.png";
+                    SN_GenerateBarcodeImage(selectedText, snFileName);
+                    SN_DisplayBarcodeImage(snFileName);
+
+                    string QRC = selectedText + result;
+                    string QRCFileName = $"Q{GenerateRandomFileName()}.png";
+                    GenerateQRCode(QRC, QRCFileName);
+                    QRC_DisplayBarcodeImage(QRCFileName);
+                }
+            }
+        }
+
         private void IncrementNumber(ref string number)
         {
             // 从最低位开始递增
@@ -336,42 +427,7 @@ namespace Algorithm
             //标题行
             IRow headerRow = sheet.CreateRow(0) as IRow;
             headerRow.CreateCell(0).SetCellValue("二维码");
-            //headerRow.CreateCell(1).SetCellValue("密码");
-            //headerRow.CreateCell(2).SetCellValue("二维码");
 
-
-            //foreach (string result1 in results)
-            //{
-            //    string[] parts = result1.Split(' ');
-            //    if (parts.Length >= 3)
-            //    {
-            //        IRow sheetRow = sheet.GetRow(row) ?? sheet.CreateRow(row);
-            //        ICell cell = sheetRow.GetCell(0) ?? sheetRow.CreateCell(0);
-            //        StringBuilder noteString = new StringBuilder("S/N:" + parts[0] + "\n");
-            //        noteString.Append("PW:" + parts[2]);
-            //        cell.SetCellValue(noteString.ToString());
-            //        // 创建样式并设置换行  
-            //        ICellStyle notesStyle = workbook.CreateCellStyle();
-            //        notesStyle.WrapText = true;
-            //        cell.CellStyle = notesStyle;
-            //        row++;
-            //    }
-            //}
-            //foreach (string result1 in results)
-            //{
-            //    string[] parts = result1.Split(' ');
-            //    if (parts.Length >= 2)
-            //    {
-            //        IRow sheetRow = sheet.GetRow(row) ?? sheet.CreateRow(row) as IRow;
-            //        //微逆ID
-            //        sheetRow.CreateCell(0).SetCellValue(parts[0].Trim());
-            //        //密码
-            //        sheetRow.CreateCell(1).SetCellValue(parts[2].Trim());
-            //        //二维码 
-            //        sheetRow.CreateCell(2).SetCellValue(parts[0] + ";" + parts[2]);
-            //        row++;
-            //    }
-            //}
             int row = 1;
             foreach (string result1 in results)
             {
@@ -386,8 +442,6 @@ namespace Algorithm
 
             // 列宽
             sheet.SetColumnWidth(0, 20 * 256); // 微逆ID
-            //sheet.SetColumnWidth(1, 11 * 256); // 密码
-            //sheet.SetColumnWidth(2, 20 * 256); // 二维码
 
             //行高
             double rowHeight = 15 * 20; 

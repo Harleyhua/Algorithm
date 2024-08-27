@@ -1,24 +1,24 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\C#_project\\Algorithm\\",
+  "WorkspaceRootPath": "E:\\C#_project\\Algorithm(1.04)\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{650F130D-A545-4BA2-9E1B-6D538C17366C}|Algorithm.csproj|E:\\C#_project\\Algorithm\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{650F130D-A545-4BA2-9E1B-6D538C17366C}|Algorithm.csproj|E:\\C#_project\\Algorithm(1.04)\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{650F130D-A545-4BA2-9E1B-6D538C17366C}|Algorithm.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{650F130D-A545-4BA2-9E1B-6D538C17366C}|Algorithm.csproj|E:\\C#_project\\Algorithm(1.04)\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{650F130D-A545-4BA2-9E1B-6D538C17366C}|Algorithm.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{650F130D-A545-4BA2-9E1B-6D538C17366C}|Algorithm.csproj|e:\\c#_project\\algorithm(1.04)\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{650F130D-A545-4BA2-9E1B-6D538C17366C}|Algorithm.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|Algorithm||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{650F130D-A545-4BA2-9E1B-6D538C17366C}|Algorithm.csproj|E:\\C#_project\\Algorithm\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{650F130D-A545-4BA2-9E1B-6D538C17366C}|Algorithm.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{650F130D-A545-4BA2-9E1B-6D538C17366C}|Algorithm.csproj|e:\\c#_project\\algorithm\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{650F130D-A545-4BA2-9E1B-6D538C17366C}|Algorithm.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{650F130D-A545-4BA2-9E1B-6D538C17366C}|Algorithm.csproj|e:\\c#_project\\algorithm\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
+      "AbsoluteMoniker": "D:0:0:{650F130D-A545-4BA2-9E1B-6D538C17366C}|Algorithm.csproj|e:\\c#_project\\algorithm(1.04)\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|a54ad834-9219-4aa6-b589-607af21c3e26"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,52 +33,52 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Form1.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "E:\\C#_project\\Algorithm\\Form1.cs",
-              "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "E:\\C#_project\\Algorithm\\Form1.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "Form1.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-22T01:15:58.725Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
+              "Title": "Algorithm",
+              "DocumentMoniker": "E:\\C#_project\\Algorithm(1.04)\\Algorithm.csproj",
+              "RelativeDocumentMoniker": "Algorithm.csproj",
+              "ToolTip": "E:\\C#_project\\Algorithm(1.04)\\Algorithm.csproj",
+              "RelativeToolTip": "Algorithm.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-08-27T05:29:52.021Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Form1.Designer.cs",
-              "DocumentMoniker": "E:\\C#_project\\Algorithm\\Form1.Designer.cs",
+              "DocumentMoniker": "E:\\C#_project\\Algorithm(1.04)\\Form1.Designer.cs",
               "RelativeDocumentMoniker": "Form1.Designer.cs",
-              "ToolTip": "E:\\C#_project\\Algorithm\\Form1.Designer.cs",
+              "ToolTip": "E:\\C#_project\\Algorithm(1.04)\\Form1.Designer.cs",
               "RelativeToolTip": "Form1.Designer.cs",
-              "ViewState": "AQIAACYAAAAAAAAAAAAkwDUAAAAnAAAA",
+              "ViewState": "AQIAAAgAAAAAAAAAAADwvxYAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-12T02:36:10.514Z",
+              "WhenOpened": "2024-08-12T07:44:47.554Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Algorithm",
-              "DocumentMoniker": "E:\\C#_project\\Algorithm\\Algorithm.csproj",
-              "RelativeDocumentMoniker": "Algorithm.csproj",
-              "ToolTip": "E:\\C#_project\\Algorithm\\Algorithm.csproj",
-              "RelativeToolTip": "Algorithm.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-07-27T02:21:47.294Z",
+              "Title": "Form1.cs",
+              "DocumentMoniker": "E:\\C#_project\\Algorithm(1.04)\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "E:\\C#_project\\Algorithm(1.04)\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AQIAAB8BAAAAAAAAAAAgwCQBAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-22T01:19:26.175Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "E:\\C#_project\\Algorithm\\Form1.cs",
+              "Title": "Form1.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "E:\\C#_project\\Algorithm(1.04)\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "E:\\C#_project\\Algorithm\\Form1.cs",
-              "RelativeToolTip": "Form1.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFIAAAAmAAAA",
+              "ToolTip": "E:\\C#_project\\Algorithm(1.04)\\Form1.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "Form1.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-22T01:19:26.175Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-22T01:15:58.725Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
             }
           ]
         }

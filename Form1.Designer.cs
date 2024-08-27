@@ -128,14 +128,15 @@
             this.txtResults.Multiline = true;
             this.txtResults.Name = "txtResults";
             this.txtResults.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtResults.Size = new System.Drawing.Size(218, 207);
+            this.txtResults.Size = new System.Drawing.Size(218, 290);
             this.txtResults.TabIndex = 10;
+            this.txtResults.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtResults_MouseDoubleClick);
             // 
             // SN_pictureBox
             // 
-            this.SN_pictureBox.Location = new System.Drawing.Point(171, 264);
+            this.SN_pictureBox.Location = new System.Drawing.Point(171, 280);
             this.SN_pictureBox.Name = "SN_pictureBox";
-            this.SN_pictureBox.Size = new System.Drawing.Size(151, 67);
+            this.SN_pictureBox.Size = new System.Drawing.Size(163, 101);
             this.SN_pictureBox.TabIndex = 12;
             this.SN_pictureBox.TabStop = false;
             // 
@@ -152,9 +153,9 @@
             // 
             // QRC_pictureBox
             // 
-            this.QRC_pictureBox.Location = new System.Drawing.Point(171, 394);
+            this.QRC_pictureBox.Location = new System.Drawing.Point(171, 510);
             this.QRC_pictureBox.Name = "QRC_pictureBox";
-            this.QRC_pictureBox.Size = new System.Drawing.Size(151, 67);
+            this.QRC_pictureBox.Size = new System.Drawing.Size(163, 103);
             this.QRC_pictureBox.TabIndex = 15;
             this.QRC_pictureBox.TabStop = false;
             // 
@@ -165,7 +166,7 @@
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(867, 574);
+            this.ClientSize = new System.Drawing.Size(969, 691);
             this.Controls.Add(this.QRC_pictureBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.SN_pictureBox);
@@ -180,7 +181,7 @@
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Algorithm(版本号1.04)";
+            this.Text = "Algorithm(版本号1.06)";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.SN_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.QRC_pictureBox)).EndInit();
